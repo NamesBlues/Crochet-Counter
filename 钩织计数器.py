@@ -4,8 +4,15 @@ class Counter:
 
     def load(self):
         try:
-            return int(open("quanshu.txt").read())
+            with open("quanshu.txt",encoding = "utf-8") as f:
+                text = f.read().strip()
         except FileNotFoundError:
+            return 0
+
+        try:
+            return int(text)
+        except ValueError:
+            print(f"存档内容异常({text!r}),已按0处理")
             return 0
 
     def save(self):
